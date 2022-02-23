@@ -46,11 +46,18 @@ class AppDetailHeaderViewController: UIViewController {
     
     private func dowloadImage() {
         guard let url = app.iconUrl else { return }
-        imageDownloader.getImage(fromUrl: url) { [weak self] image, error in
+        imageDownloader.getImage(fromUrl: url) { [weak self] result in
             
-            DispatchQueue.main.async {
-                self?.appDetailHeaderView.imageView.image = image
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self?.appDetailHeaderView.imageView.image = image
+                }
+            case .failure(let error):
+                print(error)
             }
+            
+            
         }
     }
 }

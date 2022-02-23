@@ -40,6 +40,7 @@ final class ITunesSearchService {
         
         let request = WebRequest(method: .get, url: baseUrl, parameters: parameters)
         
+        
         networkManager.dataRequest(request) { [weak self] result in
             guard let self = self else {
                 completion?(.success([]))

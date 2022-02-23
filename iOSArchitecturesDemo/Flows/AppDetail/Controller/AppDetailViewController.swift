@@ -12,6 +12,7 @@ final class AppDetailViewController: UIViewController {
     
     public var app: ITunesApp
     private lazy var headerViewController = AppDetailHeaderViewController(app: app)
+    private lazy var whatNewViewController = AppDetailWhatNewViewController(app: app)
     
     private let imageDownloader = ImageDownloader()
     
@@ -29,19 +30,10 @@ final class AppDetailViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
-    
-//    override func loadView() {
-//        super.loadView()
-//        self.view = AppDetailView()
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
-        
-//        self.configureNavigationController()
-//        self.downloadImage()
     }
     
     
@@ -53,7 +45,7 @@ final class AppDetailViewController: UIViewController {
         self.navigationItem.largeTitleDisplayMode = .never
         
         addHeaderViewController()
-        addDescriptionViewController() //ДЗ
+        addWhatNewViewController() //ДЗ
     }
     
     private func addHeaderViewController() {
@@ -72,37 +64,20 @@ final class AppDetailViewController: UIViewController {
         
     }
     
-    private func addDescriptionViewController() {
+    private func addWhatNewViewController() {
         //ДЗ: Добавить другие модели
         
-        let descriptionViewController = UIViewController()
+        self.addChild(whatNewViewController)
+        self.view.addSubview(whatNewViewController.view)
         
-        self.addChild(descriptionViewController)
-        self.view.addSubview(descriptionViewController.view)
-        
-        descriptionViewController.didMove(toParent: self)
-        descriptionViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        whatNewViewController.didMove(toParent: self)
+        whatNewViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-//            descriptionViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            descriptionViewController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            descriptionViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            descriptionViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+            whatNewViewController.view.topAnchor.constraint(equalTo: headerViewController.view.bottomAnchor, constant: 10),
+//            whatNewViewController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            whatNewViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            whatNewViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])
     }
-    
-//    private func configureNavigationController() {
-//        self.navigationController?.navigationBar.tintColor = UIColor.white;
-//        self.navigationItem.largeTitleDisplayMode = .never
-//    }
-//
-//    private func downloadImage() {
-//        guard let url = self.app?.iconUrl else { return }
-//        self.appDetailView.throbber.startAnimating()
-//        self.imageDownloader.getImage(fromUrl: url) { (image, error) in
-//            self.appDetailView.throbber.stopAnimating()
-//            guard let image = image else { return }
-//            self.appDetailView.imageView.image = image
-//        }
-//    }
 }

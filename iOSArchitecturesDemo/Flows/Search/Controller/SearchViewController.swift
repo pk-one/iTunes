@@ -61,40 +61,6 @@ final class SearchViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.throbber(show: false)
     }
-    
-    // MARK: - Private
-    
-    
-    
-    
-//    private func requestApps(with query: String) {
-//        self.throbber(show: true)
-//        self.searchResults = []
-//        self.searchView.tableView.reloadData()
-//
-//        self.searchService.getApps(forQuery: query) { [weak self] result in
-//            guard let self = self else { return }
-//            self.throbber(show: false)
-//            result
-//                .withValue { apps in
-//                    guard !apps.isEmpty else {
-//                        self.searchResults = []
-//                        self.showNoResults()
-//                        return
-//                    }
-//                    self.hideNoResults()
-//                    self.searchResults = apps
-//
-//                    self.searchView.tableView.isHidden = false
-//                    self.searchView.tableView.reloadData()
-//
-//                    self.searchView.searchBar.resignFirstResponder()
-//                }
-//                .withError {
-//                    self.showError(error: $0)
-//                }
-//        }
-//    }
 }
 
 //MARK: - UITableViewDataSource
@@ -123,9 +89,6 @@ extension SearchViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let app = searchResults[indexPath.row]
         searchPresenter.viewDidSelectApp(app: app)
-//        let appDetaillViewController = AppDetailViewController(app: app)
-//        appDetaillViewController.app = app
-//        navigationController?.pushViewController(appDetaillViewController, animated: true)
     }
 }
 
@@ -143,7 +106,6 @@ extension SearchViewController: UISearchBarDelegate {
         }
         
         searchPresenter.viewDidSearch(with: query)
-//        self.requestApps(with: query)
     }
 }
 
