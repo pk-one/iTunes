@@ -13,7 +13,7 @@ public struct ITunesSong: Codable {
     public var trackName: String
     public var artistName: String?
     public var collectionName: String?
-    public var artwork: String?
+    public var songImageURL: String?
     
     // MARK: - Codable
     
@@ -21,18 +21,26 @@ public struct ITunesSong: Codable {
         case trackName = "trackName"
         case artistName = "artistName"
         case collectionName = "collectionName"
-        case artwork = "artworkUrl100"
+        case songImageURL = "artworkUrl100"
     }
     
     // MARK: - Init
     
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.trackName = (try  container.decode(String.self, forKey: .trackName))
+        self.artistName = (try? container.decode(String.self, forKey: .artistName))
+        self.collectionName = (try? container.decode(String.self, forKey: .collectionName))
+        self.songImageURL = (try? container.decode(String.self, forKey: .songImageURL))
+    }
+    
     init(trackName: String,
          artistName: String?,
          collectionName: String?,
-         artwork: String?) {
+         urlSongImage: String?) {
         self.trackName = trackName
         self.artistName = artistName
         self.collectionName = collectionName
-        self.artwork = artwork
+        self.songImageURL = urlSongImage
     }
 }

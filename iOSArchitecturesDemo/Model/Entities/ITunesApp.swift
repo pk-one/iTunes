@@ -63,7 +63,7 @@ public struct ITunesApp: Codable {
     
     // MARK: - Init
     
-    internal init(appName: String,
+    init(appName: String,
                   appUrl: String?,
                   company: String?,
                   companyUrl: String?,

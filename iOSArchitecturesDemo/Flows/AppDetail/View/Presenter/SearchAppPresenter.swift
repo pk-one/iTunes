@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol SearchViewInput: AnyObject {
+protocol SearchAppViewInput: AnyObject {
     var searchResults: [ITunesApp] { get set }
     
     func showError(error: Error)
@@ -18,14 +18,14 @@ protocol SearchViewInput: AnyObject {
     func throbber(show: Bool)
 }
 
-protocol SearchViewOutput: AnyObject {
+protocol SearchAppViewOutput: AnyObject {
     func viewDidSearch(with query: String)
     func viewDidSelectApp(app: ITunesApp)
 }
 
-class SearchPresenter {
+class SearchAppPresenter {
     
-    weak var viewInput: (UIViewController & SearchViewInput)?
+    weak var viewInput: (UIViewController & SearchAppViewInput)?
     private let searchService = ITunesSearchService()
     
     private func requestApps(with query: String) {
@@ -56,7 +56,7 @@ class SearchPresenter {
     
 }
 
-extension SearchPresenter: SearchViewOutput {
+extension SearchAppPresenter: SearchAppViewOutput {
     func viewDidSearch(with query: String) {
         viewInput?.throbber(show: true)
         requestApps(with: query)

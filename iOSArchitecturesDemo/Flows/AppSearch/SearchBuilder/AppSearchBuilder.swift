@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-class SearchBuilder {
+class AppSearchBuilder {
     
-    static func build() -> (UIViewController & SearchViewInput) {
-        let presenter = SearchPresenter()
-        let viewController = SearchViewController(searchPresenter: presenter)
+    static func build() -> (UIViewController & SearchAppViewInput) {
+        let presenter = SearchAppPresenter()
+        let viewController = SearchAppViewController(searchPresenter: presenter)
         
         presenter.viewInput = viewController
         return viewController

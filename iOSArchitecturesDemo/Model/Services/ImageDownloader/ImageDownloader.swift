@@ -35,7 +35,6 @@ final class ImageDownloader {
                 
                 return
             }
-            
             completion(.success(image))
         })
     }
