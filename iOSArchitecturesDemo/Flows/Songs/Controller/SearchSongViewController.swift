@@ -75,8 +75,9 @@ extension SearchSongViewController: UITableViewDataSource {
             return dequeuedCell
         }
         let song = self.searchResults[indexPath.row]
-        let cellModel = SongCellModelFactory.songCellModel(from: song)
-        cell.configure(with: cellModel)
+        let _ = SongCellModelFactory.songCellModel(from: song) { cellModel in
+            cell.configure(with: cellModel)
+        }
         return cell
     }
 }
