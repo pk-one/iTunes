@@ -13,10 +13,33 @@ protocol SearchSongInteractorInput {
 }
 
 class SearchSongInteractor: SearchSongInteractorInput {
+    private var cache = Cache<NSString, [ITunesSong]>()
+    private let searchService: ITunesSearchService
     
-    private let searchSrvice = ITunesSearchService()
+    init(searchService: ITunesSearchService) {
+        self.searchService = searchService
+    }
     
     func requestSong(with query: String, completion: @escaping (Result<[ITunesSong], Error>) -> Void) {
-        searchSrvice.getSongs(forQuery: query, completion: completion)
+        if let songs = checkingCache(query: query) {
+            completion(.success(songs))
+        } else {
+            searchService.getSongs(forQuery: query) { [weak self] result in
+                switch result {
+    
+                case let .success(songs):
+                    self?.cache[query as NSString] = songs
+                case let .failure(error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    private func checkingCache(query: String) -> [ITunesSong]?{
+        if let cached = cache[query as NSString] {
+            return cached
+        }
+        return nil
     }
 }

@@ -106,7 +106,6 @@ extension SearchAppViewController: UISearchBarDelegate {
         }
         
         searchPresenter.viewDidSearch(with: query)
-        
     }
 }
 
