@@ -25,14 +25,15 @@ protocol AppSearchPresenterOutput: AnyObject {
 class AppSearchPresenter {
     weak var viewInput: (UIViewController & AppSearchPresenterInput)?
     private let interactor: AppSearchInteractorInput?
+    private let router: AppSearchRouterInput?
     
-    init(interactor: AppSearchInteractorInput?) {
+    init(interactor: AppSearchInteractorInput?, router: AppSearchRouterInput?) {
         self.interactor = interactor
+        self.router = router
     }
-    
+
     private func openDetails(with app: ITunesApp) {
-        let appDetailViewController = AppDetailViewController(app: app)
-        viewInput?.navigationController?.pushViewController(appDetailViewController, animated: true)
+        router?.openDetails(with: app)
     }
 }
 
