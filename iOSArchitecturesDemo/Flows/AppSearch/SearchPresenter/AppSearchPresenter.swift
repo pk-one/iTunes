@@ -37,7 +37,6 @@ class AppSearchPresenter {
     }
 }
 
-
 extension AppSearchPresenter: AppSearchPresenterOutput {
     func viewDidSearch(with query: String) {
         viewInput?.throbber(show: true)
