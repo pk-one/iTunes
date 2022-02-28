@@ -27,7 +27,7 @@ class SearchSongPresenter {
     private let searchService = ITunesSearchService()
     
     private func requestSong(with query: String) {
-        searchService.getSongs(forQuery: query) { [weak self] (result) in
+        searchService.getSongs(forQuery: query) { [weak self] result in
             guard let self = self else { return }
             
             self.viewInput?.throbber(show: false)

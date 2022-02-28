@@ -11,10 +11,13 @@ import UIKit
 
 class AppSearchBuilder {
     
-    static func build() -> (UIViewController & SearchAppViewInput) {
-        let presenter = SearchAppPresenter()
-        let viewController = SearchAppViewController(searchPresenter: presenter)
+    static func build() -> (UIViewController & AppSearchPresenterInput) {
         
+        let interactor = AppSearchInteractor()
+        let presenter = AppSearchPresenter(interactor: interactor)
+        
+        let viewController = SearchAppViewController(searchPresenter: presenter)
+    
         presenter.viewInput = viewController
         return viewController
     }
