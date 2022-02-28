@@ -20,15 +20,21 @@ protocol SearchSongViewInput: AnyObject {
 
 protocol SearchSongViewOutput: AnyObject {
     func viewDidSearch(with query: String)
+    func openPlayer(song: ITunesSong)
 }
-
 
 class SearchSongPresenter {
     weak var viewInput: (UIViewController & SearchSongViewInput)?
     private let interactor: SearchSongInteractorInput?
+    private let router: SearchSongRouterInput?
     
-    init(interactor: SearchSongInteractorInput) {
+    init(interactor: SearchSongInteractorInput, router: SearchSongRouterInput) {
         self.interactor = interactor
+        self.router = router
+    }
+    
+    private func openPlayer(with song: ITunesSong) {
+        router?.openPlayer(with: song)
     }
 }
 
@@ -53,5 +59,9 @@ extension SearchSongPresenter: SearchSongViewOutput {
                 self.viewInput?.showError(error: error)
             }
         })
+    }
+    
+    func openPlayer(song: ITunesSong) {
+        openPlayer(with: song)
     }
 }
