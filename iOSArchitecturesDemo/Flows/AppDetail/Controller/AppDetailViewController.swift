@@ -14,8 +14,6 @@ final class AppDetailViewController: UIViewController {
     private lazy var headerViewController = AppDetailHeaderViewController(app: app)
     private lazy var whatNewViewController = AppDetailWhatNewViewController(app: app)
     
-    private let imageDownloader = ImageDownloader()
-    
     private var appDetailView: AppDetailView {
         return self.view as! AppDetailView
     }
@@ -57,7 +55,6 @@ final class AppDetailViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             headerViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-//            headerViewController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             headerViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             headerViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])
@@ -75,7 +72,6 @@ final class AppDetailViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             whatNewViewController.view.topAnchor.constraint(equalTo: headerViewController.view.bottomAnchor, constant: 10),
-//            whatNewViewController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             whatNewViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             whatNewViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])

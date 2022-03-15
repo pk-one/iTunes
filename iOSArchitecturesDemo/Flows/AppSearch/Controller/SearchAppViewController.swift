@@ -12,7 +12,7 @@ final class SearchAppViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let searchPresenter: SearchAppViewOutput
+    private let searchPresenter: AppSearchPresenterOutput
     
     private var searchView: SearchView {
         return self.view as! SearchView
@@ -33,7 +33,7 @@ final class SearchAppViewController: UIViewController {
     
     // MARK: - Lifecycle
     
-    init(searchPresenter: SearchAppViewOutput) {
+    init(searchPresenter: AppSearchPresenterOutput) {
         self.searchPresenter = searchPresenter
         
         super.init(nibName: nil, bundle: nil)
@@ -109,7 +109,7 @@ extension SearchAppViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchAppViewController: SearchAppViewInput {
+extension SearchAppViewController: AppSearchPresenterInput {
     func throbber(show: Bool) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = show
     }
